@@ -2,14 +2,15 @@ package pe.gfi.entidad;
 
 public class Cartera {
 
-	private String NombreApellidos;
+	private String nombreApellidos;
 	private String direccion;
 	private String codigo;
+	
 	public String getNombreApellidos() {
-		return NombreApellidos;
+		return nombreApellidos;
 	}
 	public void setNombreApellidos(String nombreApellidos) {
-		NombreApellidos = nombreApellidos;
+		this.nombreApellidos = nombreApellidos;
 	}
 	public String getDireccion() {
 		return direccion;

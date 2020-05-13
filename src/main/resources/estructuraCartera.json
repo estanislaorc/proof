@@ -1,0 +1,14 @@
+[
+  {"campo":"nombreApellidos",
+   "orden":1,
+   "longuitud":50
+   },
+   {"campo":"direccion",
+   "orden":2,
+   "longuitud":30
+   },
+   {"campo":"codigo",
+   "orden":3,
+   "longuitud":40
+   }
+]

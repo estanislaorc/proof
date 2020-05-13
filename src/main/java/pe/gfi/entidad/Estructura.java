@@ -5,6 +5,7 @@ public class Estructura {
 		private String campo;
 		private int orden;
 		private int longuitud;
+		private boolean isFecha;
 		
 		public Estructura(String campo,int orden,int longuitud) {
 			this.campo=campo;
