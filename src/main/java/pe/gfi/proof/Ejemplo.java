@@ -12,7 +12,8 @@ public class Ejemplo {
 	
 	public void enviar() {
 		ProveedorServiceImpl ps=new ProveedorServiceImpl();
-		ps.enviarSaldo();
+		//ps.enviarSaldo();
+		ps.enviarCartera();
 	}
 
 }

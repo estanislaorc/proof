@@ -3,13 +3,9 @@ package pe.gfi.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
-import com.google.gson.GsonBuilder;
 
 import pe.gfi.entidad.Cartera;
 import pe.gfi.entidad.Estructura;
@@ -18,7 +14,6 @@ import pe.gfi.entidad.Host;
 import pe.gfi.entidad.Saldo;
 import pe.gfi.service.ProveedorService;
 import pe.gfi.util.Util;
-import java.nio.file.Files;
 
 public class ProveedorServiceImpl implements ProveedorService {
 
@@ -50,20 +45,57 @@ public class ProveedorServiceImpl implements ProveedorService {
 		return 1;
 	}
 	
+	@Override
+	public int enviarCartera() {
+		List<Cartera> carteraList =obtenerCarteras();
+		List<Estructura> estructFileCartera=Util.obtenerEstructura("estructuraCartera.json");
+		
+		File file;
+		
+		try {
+			System.out.println("Enviando");
+			file= Util.genenarContenido(carteraList, estructFileCartera, "fileCartera");
+			Host host=new Host("ftp.dlptest.com",21,"dlpuser@dlptest.com","SzMf7rTE4pCrf9dV286GuNe4N");
+				
+			List<FileToFTP> fileToFTPList =new ArrayList<FileToFTP>();
+			FileToFTP fileToFTP=new FileToFTP(file,"/ejemploCartera.txt");
+			
+			fileToFTPList.add(fileToFTP);
+			
+			
+			Util.enviarToFTP(host, fileToFTPList);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return 1;
+	}
+	
+	
+	
 	public List<Cartera> obtenerCarteras(){
 		List<Cartera> carteraList=new ArrayList<Cartera>();
-		Cartera cartera1=new Cartera();
-		cartera1.setNombreApellidos("Juan Perez Kia");
-		cartera1.setDireccion("Jr. Los Alpes 345");
-		cartera1.setCodigo("62370");
+		Cartera cartera1=new Cartera("DOCHAMIISA","JUR","202001",
+				"01","0136","D",
+				"2521","0477935","93",
+				"abc","ADRIANA MARITZA","HERNANDEZ",
+				"VASQUEZ","01",
+				"22301682898","27/05/1995","25",
+				"8298685282","","8298685282",
+				"201918","her@gmail.es","SANTO DOMINGO",
+				"STO DGO ESTE","STO DGO ESTE","",
+				"CAL. CALLE LA FUENTE #24 LOS 3 BRAZOS","PREGUNTAR POR PAMELA AL LADO DEL CO JALA AIRE","11/12/2019",
+				"11/12/2019","13/05/2020","16/07/2020",
+				"154","2753852","7118.0",
+				".0","7118.0",".0",
+				"7118.0","0","No Gestionada",
+				"Nom : ROSA  VÁZQUEZ   Tele : --8093881669/	Nom : AZALEA   HERNANDEZ  Tele : --8492707524/","","",
+				"",""
+				);
+
+			carteraList.add(cartera1);
 		
-		Cartera cartera2=new Cartera();
-		cartera2.setNombreApellidos("Luis Torres");
-		cartera2.setDireccion("Av. Los Pinos 346");
-		cartera2.setCodigo("98433");
-		
-		carteraList.add(cartera1);
-		carteraList.add(cartera2);
 		
 		return carteraList;
 	}
@@ -78,7 +110,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 		return saldosList;
 		
 	}
-	
+
 	
 
 }
