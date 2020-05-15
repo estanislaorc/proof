@@ -35,11 +35,18 @@ public class Util {
 							Field field = obj.getClass().getDeclaredField(estructura.getCampo());
 							field.setAccessible(true);
 							if(field.get(obj)!=null) {
-								valor = transformarValor(field.get(obj).toString(),estructura.getLonguitud());
+								valor= field.get(obj).toString();
+								//valor = transformarValor(valor,estructura.getLonguitud());
 							}
 							
-							cadena+=valor;
-							
+							if(estructura.getOrden() == maximoOrden(estructuraList)) {
+								cadena+=valor;
+							}
+							else {
+								cadena+=valor+"\t";
+							}
+
+													
 							
 						} catch (Exception e) {
 							e.printStackTrace();

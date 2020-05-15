@@ -79,7 +79,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 		Cartera cartera1=new Cartera("DOCHAMIISA","JUR","202001",
 				"01","0136","D",
 				"2521","0477935","93",
-				"abc","ADRIANA MARITZA","HERNANDEZ",
+				null,"ADRIANA MARITZA","HERNANDEZ",
 				"VASQUEZ","01",
 				"22301682898","27/05/1995","25",
 				"8298685282","","8298685282",
@@ -93,9 +93,27 @@ public class ProveedorServiceImpl implements ProveedorService {
 				"Nom : ROSA  VÁZQUEZ   Tele : --8093881669/	Nom : AZALEA   HERNANDEZ  Tele : --8492707524/","","",
 				"",""
 				);
+		
+		Cartera cartera2=new Cartera("DOCHAMIISA","JUR","202001",
+				"01","0140","C",
+				"607","0466129","56",
+				"","HILARIS ROCIO","LOPEZ",
+				"CALCAÑO","01",
+				"40241328703","15/07/1999","21",
+				"8094864381","","8094864381",
+				"201913","shantalperalta43@gmail.con","D.N.",
+				"CIUDAD NUEVA","CIUDAD NUEVA","",
+				"CAL. C LAS MERCEDES ESQ.MERILO","FRENTE A EL HOTEL","02/01/2020",
+				"17/01/2020","13/05/2020","16/07/2020",
+				"132","13276","5074.4",
+				"1031.2","4043.2",".0",
+				"4043.2","0","No Gestionada",
+				"Nom : WENDY  GOMEZ  Tele : --8298183286/","Nom : JUNIOR  PEREZ  Tele : --8296330153/","",
+				"",""
+				);
 
 			carteraList.add(cartera1);
-		
+			carteraList.add(cartera2);
 		
 		return carteraList;
 	}
