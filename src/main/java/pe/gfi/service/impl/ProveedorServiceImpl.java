@@ -80,7 +80,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 				"01","0136","D",
 				"2521","0477935","93",
 				null,"ADRIANA MARITZA","HERNANDEZ",
-				"VASQUEZ","01",
+				"VáSQUEZ","01",
 				"22301682898","27/05/1995","25",
 				"8298685282","","8298685282",
 				"201918","her@gmail.es","SANTO DOMINGO",

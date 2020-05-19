@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -56,10 +57,10 @@ public class Util {
 				
 			}
 			File file = new File(nombreArchivo);
-			FileWriter fileWriter = new FileWriter(file);
-			fileWriter.write(cadena);
-			fileWriter.flush();
-			fileWriter.close();
+			PrintWriter printWriter = new PrintWriter(file,"UTF-8");
+			printWriter.write(cadena);
+			printWriter.flush();
+			printWriter.close();
 		return file;
 	  }
 	
