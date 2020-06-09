@@ -13,13 +13,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
+import org.apache.commons.net.util.Base64;
 import org.springframework.util.ResourceUtils;
 
 import com.google.gson.GsonBuilder;
 
 import pe.gfi.entidad.Confirmacion;
+import pe.gfi.entidad.ConfirmacionLecturaFTP;
 import pe.gfi.entidad.Estructura;
 import pe.gfi.entidad.FileToFTP;
 import pe.gfi.entidad.Host;
@@ -157,5 +161,57 @@ public class Util {
 		estructFileCartera = Arrays.asList(new GsonBuilder().create().fromJson(jsonString, Estructura[].class));
 		
 		return estructFileCartera;
+	}
+	
+	public static ConfirmacionLecturaFTP obtenerFile(Host host, String pathFileFTP) {
+		
+		ConfirmacionLecturaFTP confirmacion=new ConfirmacionLecturaFTP();
+		FTPClient ftpClient = new FTPClient();
+        try {
+ 
+            ftpClient.connect(host.getIp(), host.getPort());
+            ftpClient.login(host.getUser(), host.getPass());
+            ftpClient.enterLocalPassiveMode();
+ 
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            
+            FTPFile ftpFile = ftpClient.mlistFile(pathFileFTP);
+            
+            if (ftpFile != null) {
+            	    InputStream inputStream = ftpClient.retrieveFileStream(pathFileFTP);
+            	    byte[] fileByteArray = IOUtils.toByteArray(inputStream);
+            	    Base64 codec = new Base64();
+            	    String fileBase64 = codec.encodeBase64String(fileByteArray);
+	                System.out.println("Archivo obtenido del ftp correctamente");
+	                confirmacion.setEstado(true);
+		            confirmacion.setMensaje("Archivo obtenido del ftp correctamente");
+		            confirmacion.setFileBase64(fileBase64);
+	            }
+            else {
+            	confirmacion.setEstado(false);
+                confirmacion.setMensaje("Error al obtener archivo del ftp");
+            }
+	          
+ 
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+            confirmacion.setEstado(false);
+            confirmacion.setMensaje("Error al obtener archivo del ftp");
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+		
+		
+		
+		return confirmacion;
+		
 	}
 }
