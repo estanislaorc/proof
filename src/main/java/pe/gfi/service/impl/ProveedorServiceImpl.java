@@ -28,10 +28,10 @@ public class ProveedorServiceImpl implements ProveedorService {
 		try {
 			System.out.println("Enviando");
 			file= Util.genenarContenido(saldoList, estructFileCartera, "fileSaldo");
-			Host host=new Host("ftp.dlptest.com",21,"dlpuser@dlptest.com","SzMf7rTE4pCrf9dV286GuNe4N");
+			Host host=new Host("186.119.123.133",21,"ssicccaribe","C4r1b3ftp");
 				
 			List<FileToFTP> fileToFTPList =new ArrayList<FileToFTP>();
-			FileToFTP fileToFTP=new FileToFTP(file,"/ejemploSaldo.txt");
+			FileToFTP fileToFTP=new FileToFTP(file,"/FTP_CARIBE/Pruebas/BO/BOCOBOB/ejemploSaldo.txt");
 			
 			fileToFTPList.add(fileToFTP);
 			
